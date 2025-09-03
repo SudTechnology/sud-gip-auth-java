@@ -13,8 +13,8 @@ import com.sud.gip.auth.util.CryptoUtils;
 import java.util.Date;
 
 /**
- * Sud GIP Auth Java SDK 主类
- * 提供完整的JWT认证功能，包括令牌生成、验证和用户ID获取
+ * Sud GIP Auth Java SDK main class
+ * Provides complete JWT authentication functionality including token generation, validation and user ID retrieval
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -22,50 +22,50 @@ import java.util.Date;
 public class SudGIPAuth {
     
     /**
-     * 默认认证码过期时间（秒）
+     * Default authentication code expiration time (seconds)
      */
-    private static final long DEFAULT_CODE_EXPIRE_SECONDS = 3600L; // 1小时
+    private static final long DEFAULT_CODE_EXPIRE_SECONDS = 3600L; // 1 hour
     
     /**
-     * 默认SSToken过期时间（秒）
+     * Default SSToken expiration time (seconds)
      */
-    private static final long DEFAULT_SSTOKEN_EXPIRE_SECONDS = 7200L; // 2小时
+    private static final long DEFAULT_SSTOKEN_EXPIRE_SECONDS = 7200L; // 2 hours
     
     /**
-     * 应用ID
+     * Application ID
      */
     private final String appId;
     
     /**
-     * 应用密钥
+     * Application secret
      */
     private final String appSecret;
     
     /**
-     * 基础URL（预留用于未来扩展）
+     * Base URL (reserved for future expansion)
      */
     private final String baseUrl;
     
 
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param appId 应用ID
-     * @param appSecret 应用密钥
-     * @throws IllegalArgumentException 参数无效异常
+     * @param appId Application ID
+     * @param appSecret Application secret
+     * @throws IllegalArgumentException Invalid parameter exception
      */
     public SudGIPAuth(String appId, String appSecret) {
         this(appId, appSecret, "https://api.sud.tech/gip");
     }
     
     /**
-     * 构造函数（自定义基础URL）
+     * Constructor (with custom base URL)
      * 
-     * @param appId 应用ID
-     * @param appSecret 应用密钥
-     * @param baseUrl 基础URL
-     * @throws IllegalArgumentException 参数无效异常
+     * @param appId Application ID
+     * @param appSecret Application secret
+     * @param baseUrl Base URL
+     * @throws IllegalArgumentException Invalid parameter exception
      */
     public SudGIPAuth(String appId, String appSecret, String baseUrl) {
         if (appId == null || appId.trim().isEmpty()) {
@@ -86,25 +86,25 @@ public class SudGIPAuth {
 
     
     /**
-     * 生成认证码（使用默认过期时间）
+     * Generate authentication code (using default expiration time)
      * 
-     * @param uid 用户ID
-     * @return 认证码响应
+     * @param uid User ID
+     * @return Authentication code response
      */
     public CodeResponse getCode(String uid) {
         return getCode(uid, DEFAULT_CODE_EXPIRE_SECONDS);
     }
     
     /**
-     * 生成认证码（自定义过期时间）
+     * Generate authentication code (with custom expiration time)
      * 
-     * @param uid 用户ID
-     * @param expireSeconds 过期时间（秒）
-     * @return 认证码响应
+     * @param uid User ID
+     * @param expireSeconds Expiration time (seconds)
+     * @return Authentication code response
      */
     public CodeResponse getCode(String uid, long expireSeconds) {
         try {
-            // 参数验证
+            // Parameter validation
             if (uid == null || uid.trim().isEmpty()) {
                 return CodeResponse.error(ErrorCode.APP_DATA_INVALID, "User ID cannot be null or empty");
             }
@@ -113,7 +113,7 @@ public class SudGIPAuth {
                 return CodeResponse.error(ErrorCode.APP_DATA_INVALID, "Expire seconds must be positive");
             }
             
-            // 生成认证码
+            // Generate authentication code
             String code = CryptoUtils.generateCode(uid.trim(), appId, expireSeconds, appSecret);
             Date expireDate = new Date(System.currentTimeMillis() + (expireSeconds * 1000));
             
@@ -127,25 +127,25 @@ public class SudGIPAuth {
     }
     
     /**
-     * 生成SSToken（使用默认过期时间）
+     * Generate SSToken (using default expiration time)
      * 
-     * @param uid 用户ID
-     * @return SSToken响应
+     * @param uid User ID
+     * @return SSToken response
      */
     public SSTokenResponse getSSToken(String uid) {
         return getSSToken(uid, DEFAULT_SSTOKEN_EXPIRE_SECONDS);
     }
     
     /**
-     * 生成SSToken（自定义过期时间）
+     * Generate SSToken (with custom expiration time)
      * 
-     * @param uid 用户ID
-     * @param expireSeconds 过期时间（秒）
-     * @return SSToken响应
+     * @param uid User ID
+     * @param expireSeconds Expiration time (seconds)
+     * @return SSToken response
      */
     public SSTokenResponse getSSToken(String uid, long expireSeconds) {
         try {
-            // 参数验证
+            // Parameter validation
             if (uid == null || uid.trim().isEmpty()) {
                 return SSTokenResponse.error(ErrorCode.APP_DATA_INVALID, "User ID cannot be null or empty");
             }
@@ -154,7 +154,7 @@ public class SudGIPAuth {
                 return SSTokenResponse.error(ErrorCode.APP_DATA_INVALID, "Expire seconds must be positive");
             }
             
-            // 生成SSToken
+            // Generate SSToken
             String token = CryptoUtils.generateSSToken(uid.trim(), appId, expireSeconds, appSecret);
             Date expireDate = new Date(System.currentTimeMillis() + (expireSeconds * 1000));
             
@@ -168,25 +168,25 @@ public class SudGIPAuth {
     }
     
     /**
-     * 通过认证码获取用户ID
+     * Get user ID by authentication code
      * 
-     * @param code 认证码
-     * @return 用户ID响应
+     * @param code Authentication code
+     * @return User ID response
      */
     public UidResponse getUidByCode(String code) {
         try {
-            // 参数验证
+            // Parameter validation
             if (code == null || code.trim().isEmpty()) {
                 return UidResponse.error(ErrorCode.TOKEN_INVALID, "Code cannot be null or empty");
             }
             
-            // 提取用户ID
+            // Extract user ID
             String uid = CryptoUtils.extractUidFromToken(code.trim(), appSecret);
             
             return UidResponse.success(uid);
             
         } catch (TokenValidationException e) {
-            // 根据异常信息确定具体错误码
+            // Determine specific error code based on exception message
             int errorCode = determineErrorCode(e.getMessage());
             return UidResponse.error(errorCode, e.getMessage());
         } catch (Exception e) {
@@ -195,25 +195,25 @@ public class SudGIPAuth {
     }
     
     /**
-     * 通过SSToken获取用户ID
+     * Get user ID by SSToken
      * 
      * @param ssToken SSToken
-     * @return 用户ID响应
+     * @return User ID response
      */
     public UidResponse getUidBySSToken(String ssToken) {
         try {
-            // 参数验证
+            // Parameter validation
             if (ssToken == null || ssToken.trim().isEmpty()) {
                 return UidResponse.error(ErrorCode.TOKEN_INVALID, "SSToken cannot be null or empty");
             }
             
-            // 提取用户ID
+            // Extract user ID
             String uid = CryptoUtils.extractUidFromToken(ssToken.trim(), appSecret);
             
             return UidResponse.success(uid);
             
         } catch (TokenValidationException e) {
-            // 根据异常信息确定具体错误码
+            // Determine specific error code based on exception message
             int errorCode = determineErrorCode(e.getMessage());
             return UidResponse.error(errorCode, e.getMessage());
         } catch (Exception e) {
@@ -222,10 +222,10 @@ public class SudGIPAuth {
     }
     
     /**
-     * 根据异常信息确定错误码
+     * Determine error code based on exception message
      * 
-     * @param message 异常信息
-     * @return 错误码
+     * @param message Exception message
+     * @return Error code
      */
     private int determineErrorCode(String message) {
         if (message == null) {
@@ -248,10 +248,10 @@ public class SudGIPAuth {
     }
     
     /**
-     * 检查令牌是否过期
+     * Check if token is expired
      * 
-     * @param token 令牌（认证码或SSToken）
-     * @return 是否过期
+     * @param token Token (authentication code or SSToken)
+     * @return Whether expired
      */
     public boolean isTokenExpired(String token) {
         if (token == null || token.trim().isEmpty()) {
@@ -262,18 +262,18 @@ public class SudGIPAuth {
     }
     
     /**
-     * 获取应用ID
+     * Get application ID
      * 
-     * @return 应用ID
+     * @return Application ID
      */
     public String getAppId() {
         return appId;
     }
     
     /**
-     * 获取基础URL
+     * Get base URL
      * 
-     * @return 基础URL
+     * @return Base URL
      */
     public String getBaseUrl() {
         return baseUrl;

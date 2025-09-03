@@ -3,8 +3,8 @@ package com.sud.gip.auth.model;
 import com.sud.gip.auth.constant.ErrorCode;
 
 /**
- * Sud GIP Auth 基础响应类
- * 所有响应类的基类，包含通用的状态信息
+ * Sud GIP Auth base response class
+ * Base class for all response classes, containing common status information
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,22 +12,22 @@ import com.sud.gip.auth.constant.ErrorCode;
 public abstract class BaseResponse {
     
     /**
-     * 操作是否成功
+     * Whether the operation is successful
      */
     private boolean isSuccess;
     
     /**
-     * 错误码
+     * Error code
      */
     private int errorCode;
     
     /**
-     * 错误信息
+     * Error message
      */
     private String errorMessage;
     
     /**
-     * 默认构造函数
+     * Default constructor
      */
     public BaseResponse() {
         this.isSuccess = true;
@@ -36,9 +36,9 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 成功响应构造函数
+     * Success response constructor
      * 
-     * @param isSuccess 是否成功
+     * @param isSuccess Whether successful
      */
     public BaseResponse(boolean isSuccess) {
         this.isSuccess = isSuccess;
@@ -52,9 +52,9 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 错误响应构造函数
+     * Error response constructor
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public BaseResponse(int errorCode) {
         this.isSuccess = ErrorCode.isSuccess(errorCode);
@@ -63,11 +63,11 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 完整构造函数
+     * Complete constructor
      * 
-     * @param isSuccess 是否成功
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
+     * @param isSuccess Whether successful
+     * @param errorCode Error code
+     * @param errorMessage Error message
      */
     public BaseResponse(boolean isSuccess, int errorCode, String errorMessage) {
         this.isSuccess = isSuccess;
@@ -76,36 +76,36 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 获取操作是否成功
+     * Get whether the operation is successful
      * 
-     * @return 是否成功
+     * @return Whether successful
      */
     public boolean isSuccess() {
         return isSuccess;
     }
     
     /**
-     * 设置操作是否成功
+     * Set whether the operation is successful
      * 
-     * @param success 是否成功
+     * @param success Whether successful
      */
     public void setSuccess(boolean success) {
         this.isSuccess = success;
     }
     
     /**
-     * 获取错误码
+     * Get error code
      * 
-     * @return 错误码
+     * @return Error code
      */
     public int getErrorCode() {
         return errorCode;
     }
     
     /**
-     * 设置错误码
+     * Set error code
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
@@ -116,28 +116,28 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 获取错误信息
+     * Get error message
      * 
-     * @return 错误信息
+     * @return Error message
      */
     public String getErrorMessage() {
         return errorMessage;
     }
     
     /**
-     * 设置错误信息
+     * Set error message
      * 
-     * @param errorMessage 错误信息
+     * @param errorMessage Error message
      */
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
     
     /**
-     * 设置错误状态
+     * Set error status
      * 
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
+     * @param errorCode Error code
+     * @param errorMessage Error message
      */
     public void setError(int errorCode, String errorMessage) {
         this.isSuccess = false;
@@ -146,7 +146,7 @@ public abstract class BaseResponse {
     }
     
     /**
-     * 设置成功状态
+     * Set success status
      */
     public void setSuccess() {
         this.isSuccess = true;

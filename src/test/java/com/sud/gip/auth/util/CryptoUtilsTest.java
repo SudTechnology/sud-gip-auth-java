@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 /**
- * CryptoUtils 单元测试类
+ * CryptoUtils unit test class
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -22,20 +22,20 @@ public class CryptoUtilsTest {
     
     @Test
     public void testGenerateJWT() throws TokenGenerationException {
-        long expireTime = System.currentTimeMillis() + 3600000; // 1小时后
+        long expireTime = System.currentTimeMillis() + 3600000; // 1 hour later
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
         assertNotNull(jwt);
         assertFalse(jwt.isEmpty());
         
-        // JWT应该包含三个部分，用点分隔
+        // JWT should contain three parts, separated by dots
         String[] parts = jwt.split("\\.");
         assertEquals(3, parts.length);
     }
     
     @Test
     public void testVerifyAndParseJWT() throws TokenGenerationException, TokenValidationException {
-        long expireTime = System.currentTimeMillis() + 3600000; // 1小时后
+        long expireTime = System.currentTimeMillis() + 3600000; // 1 hour later
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
         Map<String, Object> payload = CryptoUtils.verifyAndParseJWT(jwt, TEST_SECRET);
@@ -52,13 +52,13 @@ public class CryptoUtilsTest {
         long expireTime = System.currentTimeMillis() + 3600000;
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
-        // 使用错误的密钥验证
+        // Verify with wrong secret key
         CryptoUtils.verifyAndParseJWT(jwt, "wrong_secret");
     }
     
     @Test(expected = TokenValidationException.class)
     public void testVerifyExpiredJWT() throws TokenGenerationException, TokenValidationException {
-        long expireTime = System.currentTimeMillis() - 1000; // 1秒前过期
+        long expireTime = System.currentTimeMillis() - 1000; // Expired 1 second ago
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
         CryptoUtils.verifyAndParseJWT(jwt, TEST_SECRET);
@@ -87,11 +87,11 @@ public class CryptoUtilsTest {
         assertNotNull(signature);
         assertFalse(signature.isEmpty());
         
-        // 相同的数据和密钥应该产生相同的签名
+        // Same data and key should produce same signature
         String signature2 = CryptoUtils.hmacSha256(data, TEST_SECRET);
         assertEquals(signature, signature2);
         
-        // 不同的数据应该产生不同的签名
+        // Different data should produce different signature
         String signature3 = CryptoUtils.hmacSha256("different_data", TEST_SECRET);
         assertNotEquals(signature, signature3);
     }
@@ -104,7 +104,7 @@ public class CryptoUtilsTest {
         assertNotNull(encoded);
         assertFalse(encoded.isEmpty());
         
-        // Base64 URL编码不应该包含填充字符
+        // Base64 URL encoding should not contain padding characters
         assertFalse(encoded.contains("="));
     }
     
@@ -126,7 +126,7 @@ public class CryptoUtilsTest {
         assertNotNull(code);
         assertFalse(code.isEmpty());
         
-        // 验证生成的认证码是有效的JWT
+        // Verify that the generated authentication code is a valid JWT
         String[] parts = code.split("\\.");
         assertEquals(3, parts.length);
     }
@@ -139,7 +139,7 @@ public class CryptoUtilsTest {
         assertNotNull(token);
         assertFalse(token.isEmpty());
         
-        // 验证生成的SSToken是有效的JWT
+        // Verify that the generated SSToken is a valid JWT
         String[] parts = token.split("\\.");
         assertEquals(3, parts.length);
     }
@@ -167,8 +167,8 @@ public class CryptoUtilsTest {
     
     @Test
     public void testIsTokenExpiredWithExpiredToken() throws TokenGenerationException {
-        // 生成一个已经过期的令牌
-        long expireTime = System.currentTimeMillis() - 1000; // 1秒前过期
+        // Generate an already expired token
+        long expireTime = System.currentTimeMillis() - 1000; // Expired 1 second ago
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         boolean expired = CryptoUtils.isTokenExpired(jwt, TEST_SECRET);
         
@@ -183,24 +183,24 @@ public class CryptoUtilsTest {
     
     @Test
     public void testJWTRoundTrip() throws TokenGenerationException, TokenValidationException {
-        // 完整的JWT生成和验证流程
+        // Complete JWT generation and verification process
         long expireTime = System.currentTimeMillis() + 3600000;
         
-        // 生成JWT
+        // Generate JWT
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
-        // 验证和解析JWT
+        // Verify and parse JWT
         Map<String, Object> payload = CryptoUtils.verifyAndParseJWT(jwt, TEST_SECRET);
         
-        // 验证载荷内容
+        // Verify payload content
         assertEquals(TEST_UID, payload.get("uid"));
         assertEquals(TEST_APP_ID, payload.get("app_id"));
         
-        // 提取用户ID
+        // Extract user ID
         String extractedUid = CryptoUtils.extractUidFromToken(jwt, TEST_SECRET);
         assertEquals(TEST_UID, extractedUid);
         
-        // 检查过期状态
+        // Check expiration status
         assertFalse(CryptoUtils.isTokenExpired(jwt, TEST_SECRET));
     }
 }

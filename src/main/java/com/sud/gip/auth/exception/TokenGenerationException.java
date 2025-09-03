@@ -3,8 +3,8 @@ package com.sud.gip.auth.exception;
 import com.sud.gip.auth.constant.ErrorCode;
 
 /**
- * 令牌生成异常类
- * 当令牌生成失败时抛出此异常
+ * Token generation exception class
+ * Thrown when token generation fails
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,35 +12,35 @@ import com.sud.gip.auth.constant.ErrorCode;
 public class TokenGenerationException extends SudGIPAuthException {
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param message 错误信息
+     * @param message Error message
      */
     public TokenGenerationException(String message) {
         super(ErrorCode.TOKEN_CREATION_FAILED, message);
     }
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param message 错误信息
-     * @param cause 原因异常
+     * @param message Error message
+     * @param cause Cause exception
      */
     public TokenGenerationException(String message, Throwable cause) {
         super(ErrorCode.TOKEN_CREATION_FAILED, message, cause);
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      */
     public TokenGenerationException() {
         super(ErrorCode.TOKEN_CREATION_FAILED);
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      * 
-     * @param cause 原因异常
+     * @param cause Cause exception
      */
     public TokenGenerationException(Throwable cause) {
         super(ErrorCode.TOKEN_CREATION_FAILED, cause);

@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * ErrorCode 单元测试类
+ * ErrorCode unit test class
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -54,13 +54,13 @@ public class ErrorCodeTest {
         assertFalse(ErrorCode.isSuccess(ErrorCode.TOKEN_EXPIRED));
         assertFalse(ErrorCode.isSuccess(ErrorCode.APP_DATA_INVALID));
         assertFalse(ErrorCode.isSuccess(ErrorCode.UNKNOWN_ERROR));
-        assertFalse(ErrorCode.isSuccess(8888)); // 未知错误码
+        assertFalse(ErrorCode.isSuccess(8888)); // Unknown error code
     }
     
     @Test
     public void testConstructorIsPrivate() {
-        // ErrorCode类不应该被实例化，构造函数是私有的
-        // 这里我们只是验证类的设计意图，不实际调用私有构造函数
+        // ErrorCode class should not be instantiated, constructor is private
+        // Here we just verify the design intent of the class, not actually call the private constructor
         try {
             java.lang.reflect.Constructor<ErrorCode> constructor = ErrorCode.class.getDeclaredConstructor();
             assertTrue("Constructor should be private", java.lang.reflect.Modifier.isPrivate(constructor.getModifiers()));

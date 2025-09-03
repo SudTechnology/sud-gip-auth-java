@@ -3,8 +3,8 @@ package com.sud.gip.auth.model;
 import java.util.Date;
 
 /**
- * 服务器间令牌响应类
- * 用于返回生成的SSToken和相关信息
+ * Server-to-server token response class
+ * Used to return generated SSToken and related information
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,27 +12,27 @@ import java.util.Date;
 public class SSTokenResponse extends BaseResponse {
     
     /**
-     * 生成的SSToken
+     * Generated SSToken
      */
     private String token;
     
     /**
-     * SSToken过期时间
+     * SSToken expiration time
      */
     private Date expireDate;
     
     /**
-     * 默认构造函数
+     * Default constructor
      */
     public SSTokenResponse() {
         super();
     }
     
     /**
-     * 成功响应构造函数
+     * Success response constructor
      * 
      * @param token SSToken
-     * @param expireDate 过期时间
+     * @param expireDate Expiration time
      */
     public SSTokenResponse(String token, Date expireDate) {
         super();
@@ -41,22 +41,22 @@ public class SSTokenResponse extends BaseResponse {
     }
     
     /**
-     * 错误响应构造函数
+     * Error response constructor
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public SSTokenResponse(int errorCode) {
         super(errorCode);
     }
     
     /**
-     * 完整构造函数
+     * Complete constructor
      * 
-     * @param isSuccess 是否成功
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
+     * @param isSuccess Whether successful
+     * @param errorCode Error code
+     * @param errorMessage Error message
      * @param token SSToken
-     * @param expireDate 过期时间
+     * @param expireDate Expiration time
      */
     public SSTokenResponse(boolean isSuccess, int errorCode, String errorMessage, String token, Date expireDate) {
         super(isSuccess, errorCode, errorMessage);
@@ -65,7 +65,7 @@ public class SSTokenResponse extends BaseResponse {
     }
     
     /**
-     * 获取SSToken
+     * Get SSToken
      * 
      * @return SSToken
      */
@@ -74,7 +74,7 @@ public class SSTokenResponse extends BaseResponse {
     }
     
     /**
-     * 设置SSToken
+     * Set SSToken
      * 
      * @param token SSToken
      */
@@ -83,50 +83,50 @@ public class SSTokenResponse extends BaseResponse {
     }
     
     /**
-     * 获取过期时间
+     * Get expiration time
      * 
-     * @return 过期时间
+     * @return Expiration time
      */
     public Date getExpireDate() {
         return expireDate;
     }
     
     /**
-     * 设置过期时间
+     * Set expiration time
      * 
-     * @param expireDate 过期时间
+     * @param expireDate Expiration time
      */
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
     
     /**
-     * 创建成功响应
+     * Create success response
      * 
      * @param token SSToken
-     * @param expireDate 过期时间
-     * @return SSTokenResponse实例
+     * @param expireDate Expiration time
+     * @return SSTokenResponse instance
      */
     public static SSTokenResponse success(String token, Date expireDate) {
         return new SSTokenResponse(token, expireDate);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @return SSTokenResponse实例
+     * @param errorCode Error code
+     * @return SSTokenResponse instance
      */
     public static SSTokenResponse error(int errorCode) {
         return new SSTokenResponse(errorCode);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
-     * @return SSTokenResponse实例
+     * @param errorCode Error code
+     * @param errorMessage Error message
+     * @return SSTokenResponse instance
      */
     public static SSTokenResponse error(int errorCode, String errorMessage) {
         SSTokenResponse response = new SSTokenResponse(errorCode);

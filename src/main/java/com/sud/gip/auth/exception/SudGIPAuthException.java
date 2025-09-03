@@ -3,8 +3,8 @@ package com.sud.gip.auth.exception;
 import com.sud.gip.auth.constant.ErrorCode;
 
 /**
- * Sud GIP Auth 基础异常类
- * 所有Sud GIP Auth相关异常的基类
+ * Sud GIP Auth base exception class
+ * Base class for all Sud GIP Auth related exceptions
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,15 +12,15 @@ import com.sud.gip.auth.constant.ErrorCode;
 public class SudGIPAuthException extends Exception {
     
     /**
-     * 错误码
+     * Error code
      */
     private final int errorCode;
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param errorCode 错误码
-     * @param message 错误信息
+     * @param errorCode Error code
+     * @param message Error message
      */
     public SudGIPAuthException(int errorCode, String message) {
         super(message);
@@ -28,11 +28,11 @@ public class SudGIPAuthException extends Exception {
     }
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param errorCode 错误码
-     * @param message 错误信息
-     * @param cause 原因异常
+     * @param errorCode Error code
+     * @param message Error message
+     * @param cause Cause exception
      */
     public SudGIPAuthException(int errorCode, String message, Throwable cause) {
         super(message, cause);
@@ -40,9 +40,9 @@ public class SudGIPAuthException extends Exception {
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public SudGIPAuthException(int errorCode) {
         super(ErrorCode.getErrorMessage(errorCode));
@@ -50,10 +50,10 @@ public class SudGIPAuthException extends Exception {
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      * 
-     * @param errorCode 错误码
-     * @param cause 原因异常
+     * @param errorCode Error code
+     * @param cause Cause exception
      */
     public SudGIPAuthException(int errorCode, Throwable cause) {
         super(ErrorCode.getErrorMessage(errorCode), cause);
@@ -61,19 +61,19 @@ public class SudGIPAuthException extends Exception {
     }
     
     /**
-     * 获取错误码
+     * Get error code
      * 
-     * @return 错误码
+     * @return Error code
      */
     public int getErrorCode() {
         return errorCode;
     }
     
     /**
-     * 检查是否为指定错误码
+     * Check if it matches the specified error code
      * 
-     * @param errorCode 要检查的错误码
-     * @return 是否匹配
+     * @param errorCode Error code to check
+     * @return Whether it matches
      */
     public boolean isErrorCode(int errorCode) {
         return this.errorCode == errorCode;

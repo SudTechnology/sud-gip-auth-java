@@ -1,8 +1,8 @@
 package com.sud.gip.auth.model;
 
 /**
- * 用户ID响应类
- * 用于返回通过令牌获取的用户ID
+ * User ID response class
+ * Used to return user ID obtained through token
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -10,21 +10,21 @@ package com.sud.gip.auth.model;
 public class UidResponse extends BaseResponse {
     
     /**
-     * 用户ID
+     * User ID
      */
     private String uid;
     
     /**
-     * 默认构造函数
+     * Default constructor
      */
     public UidResponse() {
         super();
     }
     
     /**
-     * 成功响应构造函数
+     * Success response constructor
      * 
-     * @param uid 用户ID
+     * @param uid User ID
      */
     public UidResponse(String uid) {
         super();
@@ -32,21 +32,21 @@ public class UidResponse extends BaseResponse {
     }
     
     /**
-     * 错误响应构造函数
+     * Error response constructor
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public UidResponse(int errorCode) {
         super(errorCode);
     }
     
     /**
-     * 完整构造函数
+     * Complete constructor
      * 
-     * @param isSuccess 是否成功
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
-     * @param uid 用户ID
+     * @param isSuccess Whether successful
+     * @param errorCode Error code
+     * @param errorMessage Error message
+     * @param uid User ID
      */
     public UidResponse(boolean isSuccess, int errorCode, String errorMessage, String uid) {
         super(isSuccess, errorCode, errorMessage);
@@ -54,49 +54,49 @@ public class UidResponse extends BaseResponse {
     }
     
     /**
-     * 获取用户ID
+     * Get user ID
      * 
-     * @return 用户ID
+     * @return User ID
      */
     public String getUid() {
         return uid;
     }
     
     /**
-     * 设置用户ID
+     * Set user ID
      * 
-     * @param uid 用户ID
+     * @param uid User ID
      */
     public void setUid(String uid) {
         this.uid = uid;
     }
     
     /**
-     * 创建成功响应
+     * Create success response
      * 
-     * @param uid 用户ID
-     * @return UidResponse实例
+     * @param uid User ID
+     * @return UidResponse instance
      */
     public static UidResponse success(String uid) {
         return new UidResponse(uid);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @return UidResponse实例
+     * @param errorCode Error code
+     * @return UidResponse instance
      */
     public static UidResponse error(int errorCode) {
         return new UidResponse(errorCode);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
-     * @return UidResponse实例
+     * @param errorCode Error code
+     * @param errorMessage Error message
+     * @return UidResponse instance
      */
     public static UidResponse error(int errorCode, String errorMessage) {
         UidResponse response = new UidResponse(errorCode);

@@ -156,3 +156,8 @@ node_modules/
 
 # Trae AI specific
 .trae/
+
+# Publishing and deployment files
+settings.xml.template
+deploy.sh
+PUBLISHING.md

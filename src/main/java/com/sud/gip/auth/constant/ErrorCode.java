@@ -1,7 +1,7 @@
 package com.sud.gip.auth.constant;
 
 /**
- * Sud GIP Auth 错误码常量定义
+ * Sud GIP Auth error code constant definitions
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -9,57 +9,57 @@ package com.sud.gip.auth.constant;
 public final class ErrorCode {
     
     /**
-     * 成功
+     * Success
      */
     public static final int SUCCESS = 0;
     
     /**
-     * 令牌创建失败
+     * Token creation failed
      */
     public static final int TOKEN_CREATION_FAILED = 1001;
     
     /**
-     * 令牌验证失败
+     * Token verification failed
      */
     public static final int TOKEN_VERIFICATION_FAILED = 1002;
     
     /**
-     * 令牌解码失败
+     * Token decoding failed
      */
     public static final int TOKEN_DECODING_FAILED = 1003;
     
     /**
-     * 令牌无效
+     * Token invalid
      */
     public static final int TOKEN_INVALID = 1004;
     
     /**
-     * 令牌已过期
+     * Token expired
      */
     public static final int TOKEN_EXPIRED = 1005;
     
     /**
-     * 应用数据无效
+     * App data invalid
      */
     public static final int APP_DATA_INVALID = 1101;
     
     /**
-     * 未知错误
+     * Unknown error
      */
     public static final int UNKNOWN_ERROR = 9999;
     
     /**
-     * 私有构造函数，防止实例化
+     * Private constructor to prevent instantiation
      */
     private ErrorCode() {
         throw new AssertionError("ErrorCode class should not be instantiated");
     }
     
     /**
-     * 获取错误码对应的描述信息
+     * Get description message for error code
      * 
-     * @param errorCode 错误码
-     * @return 错误描述
+     * @param errorCode Error code
+     * @return Error description
      */
     public static String getErrorMessage(int errorCode) {
         switch (errorCode) {
@@ -85,10 +85,10 @@ public final class ErrorCode {
     }
     
     /**
-     * 检查错误码是否表示成功
+     * Check if error code indicates success
      * 
-     * @param errorCode 错误码
-     * @return 是否成功
+     * @param errorCode Error code
+     * @return Whether successful
      */
     public static boolean isSuccess(int errorCode) {
         return errorCode == SUCCESS;

@@ -3,8 +3,8 @@ package com.sud.gip.auth.exception;
 import com.sud.gip.auth.constant.ErrorCode;
 
 /**
- * 令牌验证异常类
- * 当令牌验证失败时抛出此异常
+ * Token validation exception class
+ * Thrown when token validation fails
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,35 +12,35 @@ import com.sud.gip.auth.constant.ErrorCode;
 public class TokenValidationException extends SudGIPAuthException {
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param message 错误信息
+     * @param message Error message
      */
     public TokenValidationException(String message) {
         super(ErrorCode.TOKEN_VERIFICATION_FAILED, message);
     }
     
     /**
-     * 构造函数
+     * Constructor
      * 
-     * @param message 错误信息
-     * @param cause 原因异常
+     * @param message Error message
+     * @param cause Cause exception
      */
     public TokenValidationException(String message, Throwable cause) {
         super(ErrorCode.TOKEN_VERIFICATION_FAILED, message, cause);
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      */
     public TokenValidationException() {
         super(ErrorCode.TOKEN_VERIFICATION_FAILED);
     }
     
     /**
-     * 构造函数（使用默认错误信息）
+     * Constructor (using default error message)
      * 
-     * @param cause 原因异常
+     * @param cause Cause exception
      */
     public TokenValidationException(Throwable cause) {
         super(ErrorCode.TOKEN_VERIFICATION_FAILED, cause);

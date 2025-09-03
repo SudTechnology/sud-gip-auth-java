@@ -3,8 +3,8 @@ package com.sud.gip.auth.model;
 import java.util.Date;
 
 /**
- * 认证码响应类
- * 用于返回生成的认证码和相关信息
+ * Authentication code response class
+ * Used to return generated authentication code and related information
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -12,27 +12,27 @@ import java.util.Date;
 public class CodeResponse extends BaseResponse {
     
     /**
-     * 生成的认证码
+     * Generated authentication code
      */
     private String code;
     
     /**
-     * 认证码过期时间
+     * Authentication code expiration time
      */
     private Date expireDate;
     
     /**
-     * 默认构造函数
+     * Default constructor
      */
     public CodeResponse() {
         super();
     }
     
     /**
-     * 成功响应构造函数
+     * Success response constructor
      * 
-     * @param code 认证码
-     * @param expireDate 过期时间
+     * @param code Authentication code
+     * @param expireDate Expiration time
      */
     public CodeResponse(String code, Date expireDate) {
         super();
@@ -41,22 +41,22 @@ public class CodeResponse extends BaseResponse {
     }
     
     /**
-     * 错误响应构造函数
+     * Error response constructor
      * 
-     * @param errorCode 错误码
+     * @param errorCode Error code
      */
     public CodeResponse(int errorCode) {
         super(errorCode);
     }
     
     /**
-     * 完整构造函数
+     * Complete constructor
      * 
-     * @param isSuccess 是否成功
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
-     * @param code 认证码
-     * @param expireDate 过期时间
+     * @param isSuccess Whether successful
+     * @param errorCode Error code
+     * @param errorMessage Error message
+     * @param code Authentication code
+     * @param expireDate Expiration time
      */
     public CodeResponse(boolean isSuccess, int errorCode, String errorMessage, String code, Date expireDate) {
         super(isSuccess, errorCode, errorMessage);
@@ -65,68 +65,68 @@ public class CodeResponse extends BaseResponse {
     }
     
     /**
-     * 获取认证码
+     * Get authentication code
      * 
-     * @return 认证码
+     * @return Authentication code
      */
     public String getCode() {
         return code;
     }
     
     /**
-     * 设置认证码
+     * Set authentication code
      * 
-     * @param code 认证码
+     * @param code Authentication code
      */
     public void setCode(String code) {
         this.code = code;
     }
     
     /**
-     * 获取过期时间
+     * Get expiration time
      * 
-     * @return 过期时间
+     * @return Expiration time
      */
     public Date getExpireDate() {
         return expireDate;
     }
     
     /**
-     * 设置过期时间
+     * Set expiration time
      * 
-     * @param expireDate 过期时间
+     * @param expireDate Expiration time
      */
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
     
     /**
-     * 创建成功响应
+     * Create success response
      * 
-     * @param code 认证码
-     * @param expireDate 过期时间
-     * @return CodeResponse实例
+     * @param code Authentication code
+     * @param expireDate Expiration time
+     * @return CodeResponse instance
      */
     public static CodeResponse success(String code, Date expireDate) {
         return new CodeResponse(code, expireDate);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @return CodeResponse实例
+     * @param errorCode Error code
+     * @return CodeResponse instance
      */
     public static CodeResponse error(int errorCode) {
         return new CodeResponse(errorCode);
     }
     
     /**
-     * 创建错误响应
+     * Create error response
      * 
-     * @param errorCode 错误码
-     * @param errorMessage 错误信息
-     * @return CodeResponse实例
+     * @param errorCode Error code
+     * @param errorMessage Error message
+     * @return CodeResponse instance
      */
     public static CodeResponse error(int errorCode, String errorMessage) {
         CodeResponse response = new CodeResponse(errorCode);

@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * SudGIPAuth 单元测试类
+ * SudGIPAuth unit test class
  * 
  * @author Sud Technology
  * @version 1.0.0
@@ -69,7 +69,7 @@ public class SudGIPAuthTest {
     
     @Test
     public void testGetCodeWithCustomExpireTime() {
-        long customExpireSeconds = 1800L; // 30分钟
+        long customExpireSeconds = 1800L; // 30 minutes
         CodeResponse response = auth.getCode(TEST_UID, customExpireSeconds);
         
         assertNotNull(response);
@@ -78,10 +78,10 @@ public class SudGIPAuthTest {
         assertNotNull(response.getCode());
         assertNotNull(response.getExpireDate());
         
-        // 验证过期时间大致正确（允许几秒误差）
+        // Verify expiration time is approximately correct (allow a few seconds error)
         long expectedExpireTime = System.currentTimeMillis() + (customExpireSeconds * 1000);
         long actualExpireTime = response.getExpireDate().getTime();
-        assertTrue(Math.abs(actualExpireTime - expectedExpireTime) < 5000); // 5秒误差
+        assertTrue(Math.abs(actualExpireTime - expectedExpireTime) < 5000); // 5 seconds error
     }
     
     @Test
@@ -128,7 +128,7 @@ public class SudGIPAuthTest {
     
     @Test
     public void testGetSSTokenWithCustomExpireTime() {
-        long customExpireSeconds = 3600L; // 1小时
+        long customExpireSeconds = 3600L; // 1 hour
         SSTokenResponse response = auth.getSSToken(TEST_UID, customExpireSeconds);
         
         assertNotNull(response);
@@ -137,10 +137,10 @@ public class SudGIPAuthTest {
         assertNotNull(response.getToken());
         assertNotNull(response.getExpireDate());
         
-        // 验证过期时间大致正确（允许几秒误差）
+        // Verify expiration time is approximately correct (allow a few seconds error)
         long expectedExpireTime = System.currentTimeMillis() + (customExpireSeconds * 1000);
         long actualExpireTime = response.getExpireDate().getTime();
-        assertTrue(Math.abs(actualExpireTime - expectedExpireTime) < 5000); // 5秒误差
+        assertTrue(Math.abs(actualExpireTime - expectedExpireTime) < 5000); // 5 seconds error
     }
     
     @Test
@@ -165,11 +165,11 @@ public class SudGIPAuthTest {
     
     @Test
     public void testGetUidByCodeSuccess() {
-        // 先生成一个认证码
+        // First generate an authentication code
         CodeResponse codeResponse = auth.getCode(TEST_UID);
         assertTrue(codeResponse.isSuccess());
         
-        // 通过认证码获取用户ID
+        // Get user ID through authentication code
         UidResponse uidResponse = auth.getUidByCode(codeResponse.getCode());
         
         assertNotNull(uidResponse);
@@ -210,11 +210,11 @@ public class SudGIPAuthTest {
     
     @Test
     public void testGetUidBySSTokenSuccess() {
-        // 先生成一个SSToken
+        // First generate an SSToken
         SSTokenResponse tokenResponse = auth.getSSToken(TEST_UID);
         assertTrue(tokenResponse.isSuccess());
         
-        // 通过SSToken获取用户ID
+        // Get user ID through SSToken
         UidResponse uidResponse = auth.getUidBySSToken(tokenResponse.getToken());
         
         assertNotNull(uidResponse);
@@ -255,29 +255,29 @@ public class SudGIPAuthTest {
     
     @Test
     public void testIsTokenExpiredWithValidToken() {
-        // 生成一个有效的认证码
-        CodeResponse codeResponse = auth.getCode(TEST_UID, 3600); // 1小时
+        // Generate a valid authentication code
+        CodeResponse codeResponse = auth.getCode(TEST_UID, 3600); // 1 hour
         assertTrue(codeResponse.isSuccess());
         
-        // 检查是否过期
+        // Check if expired
         boolean expired = auth.isTokenExpired(codeResponse.getCode());
         assertFalse(expired);
     }
     
     @Test
     public void testIsTokenExpiredWithExpiredToken() {
-        // 生成一个很快过期的认证码
-        CodeResponse codeResponse = auth.getCode(TEST_UID, 1); // 1秒
+        // Generate an authentication code that expires quickly
+        CodeResponse codeResponse = auth.getCode(TEST_UID, 1); // 1 second
         assertTrue(codeResponse.isSuccess());
         
-        // 等待令牌过期
+        // Wait for token to expire
         try {
-            Thread.sleep(2000); // 等待2秒
+            Thread.sleep(2000); // Wait 2 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
         
-        // 检查是否过期
+        // Check if expired
         boolean expired = auth.isTokenExpired(codeResponse.getCode());
         assertTrue(expired);
     }
@@ -302,7 +302,7 @@ public class SudGIPAuthTest {
         assertTrue(codeResponse.isSuccess());
         assertTrue(tokenResponse.isSuccess());
         
-        // 认证码和SSToken应该不同（虽然用户ID相同）
+        // Authentication code and SSToken should be different (even though user ID is the same)
         assertNotEquals(codeResponse.getCode(), tokenResponse.getToken());
     }
     
