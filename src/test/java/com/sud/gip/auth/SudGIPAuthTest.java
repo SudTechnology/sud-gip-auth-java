@@ -33,7 +33,6 @@ public class SudGIPAuthTest {
         assertNotNull(auth);
         assertEquals(TEST_APP_ID, auth.getAppId());
         assertNotNull(auth.getBaseUrl());
-        assertNotNull(auth.getHttpClient());
     }
     
     @Test(expected = IllegalArgumentException.class)

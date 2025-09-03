@@ -8,8 +8,7 @@ import com.sud.gip.auth.model.CodeResponse;
 import com.sud.gip.auth.model.SSTokenResponse;
 import com.sud.gip.auth.model.UidResponse;
 import com.sud.gip.auth.util.CryptoUtils;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClients;
+
 
 import java.util.Date;
 
@@ -47,10 +46,7 @@ public class SudGIPAuth {
      */
     private final String baseUrl;
     
-    /**
-     * HTTP客户端（预留用于未来扩展）
-     */
-    private final HttpClient httpClient;
+
     
     /**
      * 构造函数
@@ -60,7 +56,7 @@ public class SudGIPAuth {
      * @throws IllegalArgumentException 参数无效异常
      */
     public SudGIPAuth(String appId, String appSecret) {
-        this(appId, appSecret, "https://api.sud.tech/gip", HttpClients.createDefault());
+        this(appId, appSecret, "https://api.sud.tech/gip");
     }
     
     /**
@@ -72,31 +68,6 @@ public class SudGIPAuth {
      * @throws IllegalArgumentException 参数无效异常
      */
     public SudGIPAuth(String appId, String appSecret, String baseUrl) {
-        this(appId, appSecret, baseUrl, HttpClients.createDefault());
-    }
-    
-    /**
-     * 构造函数（自定义HTTP客户端）
-     * 
-     * @param appId 应用ID
-     * @param appSecret 应用密钥
-     * @param httpClient HTTP客户端
-     * @throws IllegalArgumentException 参数无效异常
-     */
-    public SudGIPAuth(String appId, String appSecret, HttpClient httpClient) {
-        this(appId, appSecret, "https://api.sud.tech/gip", httpClient);
-    }
-    
-    /**
-     * 完整构造函数
-     * 
-     * @param appId 应用ID
-     * @param appSecret 应用密钥
-     * @param baseUrl 基础URL
-     * @param httpClient HTTP客户端
-     * @throws IllegalArgumentException 参数无效异常
-     */
-    public SudGIPAuth(String appId, String appSecret, String baseUrl, HttpClient httpClient) {
         if (appId == null || appId.trim().isEmpty()) {
             throw new IllegalArgumentException("App ID cannot be null or empty");
         }
@@ -106,15 +77,13 @@ public class SudGIPAuth {
         if (baseUrl == null || baseUrl.trim().isEmpty()) {
             throw new IllegalArgumentException("Base URL cannot be null or empty");
         }
-        if (httpClient == null) {
-            throw new IllegalArgumentException("HTTP Client cannot be null");
-        }
         
         this.appId = appId.trim();
         this.appSecret = appSecret.trim();
         this.baseUrl = baseUrl.trim();
-        this.httpClient = httpClient;
     }
+    
+
     
     /**
      * 生成认证码（使用默认过期时间）
@@ -310,14 +279,7 @@ public class SudGIPAuth {
         return baseUrl;
     }
     
-    /**
-     * 获取HTTP客户端
-     * 
-     * @return HTTP客户端
-     */
-    public HttpClient getHttpClient() {
-        return httpClient;
-    }
+
     
     @Override
     public String toString() {

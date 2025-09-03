@@ -194,21 +194,6 @@ public class AuthService {
 
 ## Configuration Options
 
-### Custom HTTP Client
-
-```java
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.HttpClientBuilder;
-
-// Create custom HTTP client
-HttpClientBuilder builder = HttpClients.custom()
-    .setConnectionTimeToLive(30, TimeUnit.SECONDS)
-    .setMaxConnTotal(100)
-    .setMaxConnPerRoute(20);
-
-SudGIPAuth auth = new SudGIPAuth(appId, appSecret, builder.build());
-```
-
 ### Custom Service Endpoint
 
 ```java
