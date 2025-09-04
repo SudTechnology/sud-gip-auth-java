@@ -41,10 +41,7 @@ public class SudGIPAuth {
      */
     private final String appSecret;
     
-    /**
-     * Base URL (reserved for future expansion)
-     */
-    private final String baseUrl;
+
     
 
     
@@ -56,31 +53,15 @@ public class SudGIPAuth {
      * @throws IllegalArgumentException Invalid parameter exception
      */
     public SudGIPAuth(String appId, String appSecret) {
-        this(appId, appSecret, "https://api.sud.tech/gip");
-    }
-    
-    /**
-     * Constructor (with custom base URL)
-     * 
-     * @param appId Application ID
-     * @param appSecret Application secret
-     * @param baseUrl Base URL
-     * @throws IllegalArgumentException Invalid parameter exception
-     */
-    public SudGIPAuth(String appId, String appSecret, String baseUrl) {
         if (appId == null || appId.trim().isEmpty()) {
             throw new IllegalArgumentException("App ID cannot be null or empty");
         }
         if (appSecret == null || appSecret.trim().isEmpty()) {
             throw new IllegalArgumentException("App Secret cannot be null or empty");
         }
-        if (baseUrl == null || baseUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException("Base URL cannot be null or empty");
-        }
         
         this.appId = appId.trim();
         this.appSecret = appSecret.trim();
-        this.baseUrl = baseUrl.trim();
     }
     
 
@@ -270,14 +251,7 @@ public class SudGIPAuth {
         return appId;
     }
     
-    /**
-     * Get base URL
-     * 
-     * @return Base URL
-     */
-    public String getBaseUrl() {
-        return baseUrl;
-    }
+
     
 
     
@@ -285,7 +259,6 @@ public class SudGIPAuth {
     public String toString() {
         return "SudGIPAuth{" +
                 "appId='" + appId + '\'' +
-                ", baseUrl='" + baseUrl + '\'' +
                 '}';
     }
 }

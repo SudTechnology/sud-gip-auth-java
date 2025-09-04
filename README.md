@@ -192,15 +192,6 @@ public class AuthService {
 | 1101 | Application data is invalid | Verify application ID and secret   |
 | 9999 | Unknown error   | Contact technical support      |
 
-## Configuration Options
-
-### Custom Service Endpoint
-
-```java
-// Use custom service endpoint
-SudGIPAuth auth = new SudGIPAuth(appId, appSecret, "https://custom.api.endpoint.com");
-```
-
 ## Best Practices
 
 1. **Credential Security**: Do not hardcode application ID and secret in code, use environment variables or configuration files
