@@ -1,7 +1,6 @@
 package com.sud.gip.auth;
 
 import com.sud.gip.auth.constant.ErrorCode;
-import com.sud.gip.auth.exception.SudGIPAuthException;
 import com.sud.gip.auth.exception.TokenGenerationException;
 import com.sud.gip.auth.exception.TokenValidationException;
 import com.sud.gip.auth.model.CodeResponse;
@@ -42,9 +41,6 @@ public class SudGIPAuth {
     private final String appSecret;
     
 
-    
-
-    
     /**
      * Constructor
      * 
@@ -63,8 +59,6 @@ public class SudGIPAuth {
         this.appId = appId.trim();
         this.appSecret = appSecret.trim();
     }
-    
-
     
     /**
      * Generate authentication code (using default expiration time)
@@ -252,9 +246,6 @@ public class SudGIPAuth {
     }
     
 
-    
-
-    
     @Override
     public String toString() {
         return "SudGIPAuth{" +
