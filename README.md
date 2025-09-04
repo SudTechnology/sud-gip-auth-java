@@ -206,33 +206,9 @@ SudGIPAuth auth = new SudGIPAuth(appId, appSecret, "https://custom.api.endpoint.
 1. **Credential Security**: Do not hardcode application ID and secret in code, use environment variables or configuration files
 2. **Instance Reuse**: `SudGIPAuth` instance creation is expensive, recommend using as singleton
 3. **Error Handling**: Always check the `isSuccess()` status of responses
-4. **Token Caching**: For frequently used tokens, consider implementing local caching mechanisms
-5. **Logging**: Enable appropriate logging in production environments
+4. **Logging**: Enable appropriate logging in production environments
 
-## Example Projects
 
-Complete example projects can be found in the [examples](./examples) directory, including:
-
-* Spring Boot integration example
-
-* Android application integration example
-
-* Multi-threaded usage example
-
-## Migration from PHP Version
-
-If you were previously using the PHP version of Sud GIP Auth SDK, here are the main migration mappings:
-
-| PHP Method                            | Java Method                        | Description              |
-| -------------------------------- | ----------------------------- | --------------- |
-| `$auth->getCode($uid)`           | `auth.getCode(uid)`           | Get authentication code           |
-| `$auth->getSSToken($uid)`        | `auth.getSSToken(uid)`        | Get SSToken       |
-| `$auth->getUidByCode($code)`     | `auth.getUidByCode(code)`     | Get user ID by authentication code     |
-| `$auth->getUidBySSToken($token)` | `auth.getUidBySSToken(token)` | Get user ID by SSToken |
-
-## Contributing
-
-We welcome community contributions! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how to participate in project development.
 
 ## License
 
