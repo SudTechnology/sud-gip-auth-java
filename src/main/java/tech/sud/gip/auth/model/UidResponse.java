@@ -1,4 +1,4 @@
-package com.sud.gip.auth.model;
+package tech.sud.gip.auth.model;
 
 /**
  * User ID response class

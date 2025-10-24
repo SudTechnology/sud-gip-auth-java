@@ -1,7 +1,7 @@
-package com.sud.gip.auth.util;
+package tech.sud.gip.auth.util;
 
-import com.sud.gip.auth.exception.TokenGenerationException;
-import com.sud.gip.auth.exception.TokenValidationException;
+import tech.sud.gip.auth.exception.TokenGenerationException;
+import tech.sud.gip.auth.exception.TokenValidationException;
 import org.junit.Test;
 
 import java.util.Map;

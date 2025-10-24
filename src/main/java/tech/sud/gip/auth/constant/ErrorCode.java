@@ -1,4 +1,4 @@
-package com.sud.gip.auth.constant;
+package tech.sud.gip.auth.constant;
 
 /**
  * Sud GIP Auth error code constant definitions

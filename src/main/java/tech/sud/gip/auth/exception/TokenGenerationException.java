@@ -1,6 +1,6 @@
-package com.sud.gip.auth.exception;
+package tech.sud.gip.auth.exception;
 
-import com.sud.gip.auth.constant.ErrorCode;
+import tech.sud.gip.auth.constant.ErrorCode;
 
 /**
  * Token generation exception class

@@ -1,9 +1,9 @@
-package com.sud.gip.auth;
+package tech.sud.gip.auth;
 
-import com.sud.gip.auth.constant.ErrorCode;
-import com.sud.gip.auth.model.CodeResponse;
-import com.sud.gip.auth.model.SSTokenResponse;
-import com.sud.gip.auth.model.UidResponse;
+import tech.sud.gip.auth.constant.ErrorCode;
+import tech.sud.gip.auth.model.CodeResponse;
+import tech.sud.gip.auth.model.SSTokenResponse;
+import tech.sud.gip.auth.model.UidResponse;
 import org.junit.Before;
 import org.junit.Test;
 

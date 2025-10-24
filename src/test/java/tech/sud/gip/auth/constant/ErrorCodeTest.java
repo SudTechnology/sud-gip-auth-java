@@ -1,4 +1,4 @@
-package com.sud.gip.auth.constant;
+package tech.sud.gip.auth.constant;
 
 import org.junit.Test;
 

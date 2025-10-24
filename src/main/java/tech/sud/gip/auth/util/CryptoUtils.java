@@ -1,9 +1,9 @@
-package com.sud.gip.auth.util;
+package tech.sud.gip.auth.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sud.gip.auth.constant.ErrorCode;
-import com.sud.gip.auth.exception.TokenGenerationException;
-import com.sud.gip.auth.exception.TokenValidationException;
+import tech.sud.gip.auth.constant.ErrorCode;
+import tech.sud.gip.auth.exception.TokenGenerationException;
+import tech.sud.gip.auth.exception.TokenValidationException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
