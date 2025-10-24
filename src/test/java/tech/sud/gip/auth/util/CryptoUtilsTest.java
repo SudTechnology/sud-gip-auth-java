@@ -2,11 +2,11 @@ package tech.sud.gip.auth.util;
 
 import tech.sud.gip.auth.exception.TokenGenerationException;
 import tech.sud.gip.auth.exception.TokenValidationException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * CryptoUtils unit test class
@@ -47,36 +47,36 @@ public class CryptoUtilsTest {
         assertNotNull(payload.get("iat"));
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testVerifyJWTWithWrongSecret() throws TokenGenerationException, TokenValidationException {
         long expireTime = System.currentTimeMillis() + 3600000;
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
         // Verify with wrong secret key
-        CryptoUtils.verifyAndParseJWT(jwt, "wrong_secret");
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.verifyAndParseJWT(jwt, "wrong_secret"));
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testVerifyExpiredJWT() throws TokenGenerationException, TokenValidationException {
         long expireTime = System.currentTimeMillis() - 1000; // Expired 1 second ago
         String jwt = CryptoUtils.generateJWT(TEST_UID, TEST_APP_ID, expireTime, TEST_SECRET);
         
-        CryptoUtils.verifyAndParseJWT(jwt, TEST_SECRET);
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.verifyAndParseJWT(jwt, TEST_SECRET));
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testVerifyInvalidJWTFormat() throws TokenValidationException {
-        CryptoUtils.verifyAndParseJWT("invalid.jwt", TEST_SECRET);
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.verifyAndParseJWT("invalid.jwt", TEST_SECRET));
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testVerifyNullJWT() throws TokenValidationException {
-        CryptoUtils.verifyAndParseJWT(null, TEST_SECRET);
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.verifyAndParseJWT(null, TEST_SECRET));
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testVerifyEmptyJWT() throws TokenValidationException {
-        CryptoUtils.verifyAndParseJWT("", TEST_SECRET);
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.verifyAndParseJWT("", TEST_SECRET));
     }
     
     @Test
@@ -152,9 +152,9 @@ public class CryptoUtilsTest {
         assertEquals(TEST_UID, extractedUid);
     }
     
-    @Test(expected = TokenValidationException.class)
+    @Test
     public void testExtractUidFromInvalidToken() throws TokenValidationException {
-        CryptoUtils.extractUidFromToken("invalid_token", TEST_SECRET);
+        assertThrows(TokenValidationException.class, () -> CryptoUtils.extractUidFromToken("invalid_token", TEST_SECRET));
     }
     
     @Test

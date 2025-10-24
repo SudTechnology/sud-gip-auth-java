@@ -4,10 +4,10 @@ import tech.sud.gip.auth.constant.ErrorCode;
 import tech.sud.gip.auth.model.CodeResponse;
 import tech.sud.gip.auth.model.SSTokenResponse;
 import tech.sud.gip.auth.model.UidResponse;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * SudGIPAuth unit test class
@@ -23,7 +23,7 @@ public class SudGIPAuthTest {
     
     private SudGIPAuth auth;
     
-    @Before
+    @BeforeEach
     public void setUp() {
         auth = new SudGIPAuth(TEST_APP_ID, TEST_APP_SECRET);
     }
@@ -34,24 +34,24 @@ public class SudGIPAuthTest {
         assertEquals(TEST_APP_ID, auth.getAppId());
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructorWithNullAppId() {
-        new SudGIPAuth(null, TEST_APP_SECRET);
+        assertThrows(IllegalArgumentException.class, () -> new SudGIPAuth(null, TEST_APP_SECRET));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructorWithEmptyAppId() {
-        new SudGIPAuth("", TEST_APP_SECRET);
+        assertThrows(IllegalArgumentException.class, () -> new SudGIPAuth("", TEST_APP_SECRET));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructorWithNullAppSecret() {
-        new SudGIPAuth(TEST_APP_ID, null);
+        assertThrows(IllegalArgumentException.class, () -> new SudGIPAuth(TEST_APP_ID, null));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructorWithEmptyAppSecret() {
-        new SudGIPAuth(TEST_APP_ID, "");
+        assertThrows(IllegalArgumentException.class, () -> new SudGIPAuth(TEST_APP_ID, ""));
     }
     
     @Test

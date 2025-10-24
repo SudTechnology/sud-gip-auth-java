@@ -1,8 +1,8 @@
 package tech.sud.gip.auth.constant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * ErrorCode unit test class
@@ -63,7 +63,7 @@ public class ErrorCodeTest {
         // Here we just verify the design intent of the class, not actually call the private constructor
         try {
             java.lang.reflect.Constructor<ErrorCode> constructor = ErrorCode.class.getDeclaredConstructor();
-            assertTrue("Constructor should be private", java.lang.reflect.Modifier.isPrivate(constructor.getModifiers()));
+            assertTrue(java.lang.reflect.Modifier.isPrivate(constructor.getModifiers()), "Constructor should be private");
         } catch (NoSuchMethodException e) {
             fail("Private constructor should exist");
         }

@@ -14,7 +14,7 @@ The Sud GIP Auth Java SDK is an authentication system library designed specifica
 
 * **User ID Retrieval**: Retrieves user IDs through authentication codes or SSTokens
 
-* **JDK 1.8 Compatible**: Fully compatible with JDK 1.8 and higher versions
+* **Java 17 Compatible**: Fully compatible with Java 17 and higher versions
 
 * **Thread Safe**: Supports concurrent usage in multi-threaded environments
 
@@ -22,7 +22,7 @@ The Sud GIP Auth Java SDK is an authentication system library designed specifica
 
 ## System Requirements
 
-* JDK 1.8 or higher
+* Java 17 or higher
 
 * Maven 3.x or Gradle 4.x+
 
@@ -57,7 +57,7 @@ implementation 'com.sudtech:sud-gip-auth-java:1.0.0'
 First, you need to instantiate the `SudGIPAuth` class and pass in your application ID and application secret:
 
 ```java
-import com.sud.gip.auth.SudGIPAuth;
+import tech.sud.gip.auth.SudGIPAuth;
 
 public class Example {
     public static void main(String[] args) {
@@ -72,7 +72,7 @@ public class Example {
 ### Get Authentication Code
 
 ```java
-import com.sud.gip.auth.model.CodeResponse;
+import tech.sud.gip.auth.model.CodeResponse;
 
 String uid = "user_id";
 CodeResponse codeResponse = auth.getCode(uid);
@@ -88,7 +88,7 @@ if (codeResponse.isSuccess()) {
 ### Get Server-to-Server Token (SSToken)
 
 ```java
-import com.sud.gip.auth.model.SSTokenResponse;
+import tech.sud.gip.auth.model.SSTokenResponse;
 
 String uid = "user_id";
 SSTokenResponse ssTokenResponse = auth.getSSToken(uid);
@@ -104,7 +104,7 @@ if (ssTokenResponse.isSuccess()) {
 ### Get User ID by Authentication Code
 
 ```java
-import com.sud.gip.auth.model.UidResponse;
+import tech.sud.gip.auth.model.UidResponse;
 
 String code = "your_auth_code";
 UidResponse uidResponse = auth.getUidByCode(code);
@@ -146,9 +146,9 @@ SSTokenResponse ssTokenResponse = auth.getSSToken(uid, 14400);
 ### Exception Handling
 
 ```java
-import com.sud.gip.auth.exception.SudGIPAuthException;
-import com.sud.gip.auth.exception.TokenGenerationException;
-import com.sud.gip.auth.exception.TokenValidationException;
+import tech.sud.gip.auth.exception.SudGIPAuthException;
+import tech.sud.gip.auth.exception.TokenGenerationException;
+import tech.sud.gip.auth.exception.TokenValidationException;
 
 try {
     CodeResponse response = auth.getCode(uid);
