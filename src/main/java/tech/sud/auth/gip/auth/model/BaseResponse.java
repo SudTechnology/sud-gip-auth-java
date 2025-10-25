@@ -1,6 +1,6 @@
-package tech.sud.gip.auth.model;
+package tech.sud.auth.gip.auth.model;
 
-import tech.sud.gip.auth.constant.ErrorCode;
+import tech.sud.auth.gip.auth.constant.ErrorCode;
 
 /**
  * Sud GIP Auth base response class

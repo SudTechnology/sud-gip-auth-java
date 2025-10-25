@@ -1,6 +1,6 @@
-package tech.sud.gip.auth.exception;
+package tech.sud.auth.gip.auth.exception;
 
-import tech.sud.gip.auth.constant.ErrorCode;
+import tech.sud.auth.gip.auth.constant.ErrorCode;
 
 /**
  * Token validation exception class

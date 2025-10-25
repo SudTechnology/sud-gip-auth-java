@@ -1,12 +1,12 @@
-package tech.sud.gip.auth;
+package tech.sud.auth.gip.auth;
 
-import tech.sud.gip.auth.constant.ErrorCode;
-import tech.sud.gip.auth.exception.TokenGenerationException;
-import tech.sud.gip.auth.exception.TokenValidationException;
-import tech.sud.gip.auth.model.CodeResponse;
-import tech.sud.gip.auth.model.SSTokenResponse;
-import tech.sud.gip.auth.model.UidResponse;
-import tech.sud.gip.auth.util.CryptoUtils;
+import tech.sud.auth.gip.auth.constant.ErrorCode;
+import tech.sud.auth.gip.auth.exception.TokenGenerationException;
+import tech.sud.auth.gip.auth.exception.TokenValidationException;
+import tech.sud.auth.gip.auth.model.CodeResponse;
+import tech.sud.auth.gip.auth.model.SSTokenResponse;
+import tech.sud.auth.gip.auth.model.UidResponse;
+import tech.sud.auth.gip.auth.util.CryptoUtils;
 
 
 import java.util.Date;

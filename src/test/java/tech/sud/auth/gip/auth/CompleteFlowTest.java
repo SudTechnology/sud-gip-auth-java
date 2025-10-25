@@ -1,13 +1,13 @@
-package tech.sud.gip.auth;
+package tech.sud.auth.gip.auth;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
-import tech.sud.gip.auth.model.CodeResponse;
-import tech.sud.gip.auth.model.SSTokenResponse;
-import tech.sud.gip.auth.model.UidResponse;
+import tech.sud.auth.gip.auth.model.CodeResponse;
+import tech.sud.auth.gip.auth.model.SSTokenResponse;
+import tech.sud.auth.gip.auth.model.UidResponse;
 
 /**
  * Complete flow test demonstrating the full authentication workflow:

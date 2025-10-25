@@ -1,4 +1,4 @@
-package tech.sud.gip.auth.model;
+package tech.sud.auth.gip.auth.model;
 
 import java.util.Date;
 
