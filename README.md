@@ -34,7 +34,7 @@ Add the following dependency to your `pom.xml` file:
 
 ```xml
 <dependency>
-    <groupId>com.sudtech</groupId>
+    <groupId>tech.sud</groupId>
     <artifactId>sud-gip-auth-java</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -45,7 +45,7 @@ Add the following dependency to your `pom.xml` file:
 Add the following dependency to your `build.gradle` file:
 
 ```gradle
-implementation 'com.sudtech:sud-gip-auth-java:1.0.0'
+implementation 'tech.sud:sud-gip-auth-java:1.0.0'
 ```
 
 > **Note**: This SDK will be published to Maven Central Repository. For publishing instructions, see [PUBLISHING.md](./PUBLISHING.md).
@@ -57,7 +57,7 @@ implementation 'com.sudtech:sud-gip-auth-java:1.0.0'
 First, you need to instantiate the `SudGIPAuth` class and pass in your application ID and application secret:
 
 ```java
-import tech.sud.gip.auth.SudGIPAuth;
+import tech.sud.auth.gip.auth.SudGIPAuth;
 
 public class Example {
     public static void main(String[] args) {
@@ -72,7 +72,7 @@ public class Example {
 ### Get Authentication Code
 
 ```java
-import tech.sud.gip.auth.model.CodeResponse;
+import tech.sud.auth.gip.auth.model.CodeResponse;
 
 String uid = "user_id";
 CodeResponse codeResponse = auth.getCode(uid);
@@ -88,7 +88,7 @@ if (codeResponse.isSuccess()) {
 ### Get Server-to-Server Token (SSToken)
 
 ```java
-import tech.sud.gip.auth.model.SSTokenResponse;
+import tech.sud.auth.gip.auth.model.SSTokenResponse;
 
 String uid = "user_id";
 SSTokenResponse ssTokenResponse = auth.getSSToken(uid);
@@ -104,7 +104,7 @@ if (ssTokenResponse.isSuccess()) {
 ### Get User ID by Authentication Code
 
 ```java
-import tech.sud.gip.auth.model.UidResponse;
+import tech.sud.auth.gip.auth.model.UidResponse;
 
 String code = "your_auth_code";
 UidResponse uidResponse = auth.getUidByCode(code);
