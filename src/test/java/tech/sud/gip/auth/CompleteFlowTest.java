@@ -5,6 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
+import tech.sud.gip.auth.model.CodeResponse;
+import tech.sud.gip.auth.model.SSTokenResponse;
+import tech.sud.gip.auth.model.UidResponse;
+
 /**
  * Complete flow test demonstrating the full authentication workflow:
  * 1. Generate code from UID
@@ -32,7 +36,7 @@ public class CompleteFlowTest {
         
         // Step 1: Generate code from UID
         System.out.println("\n--- Step 1: Generate Code from UID ---");
-        var codeResponse = auth.getCode(TEST_UID);
+        CodeResponse codeResponse = auth.getCode(TEST_UID);
         System.out.println("UID: " + TEST_UID);
         System.out.println("Code Response: " + codeResponse);
         
@@ -46,7 +50,7 @@ public class CompleteFlowTest {
         
         // Step 2: Parse UID from code
         System.out.println("\n--- Step 2: Parse UID from Code ---");
-        var uidResponse = auth.getUidByCode(code);
+        UidResponse uidResponse = auth.getUidByCode(code);
         System.out.println("Original Code: " + code);
         System.out.println("UID Response: " + uidResponse);
         
@@ -59,7 +63,7 @@ public class CompleteFlowTest {
         
         // Step 3: Generate SSToken from UID
         System.out.println("\n--- Step 3: Generate SSToken from UID ---");
-        var tokenResponse = auth.getSSToken(TEST_UID);
+        SSTokenResponse tokenResponse = auth.getSSToken(TEST_UID);
         System.out.println("UID: " + TEST_UID);
         System.out.println("Token Response: " + tokenResponse);
         
@@ -73,7 +77,7 @@ public class CompleteFlowTest {
         
         // Step 4: Verify SSToken can be used to get UID
         System.out.println("\n--- Step 4: Verify SSToken ---");
-        var tokenUidResponse = auth.getUidBySSToken(ssToken);
+        UidResponse tokenUidResponse = auth.getUidBySSToken(ssToken);
         System.out.println("SSToken: " + ssToken);
         System.out.println("UID Response from Token: " + tokenUidResponse);
         
@@ -97,25 +101,25 @@ public class CompleteFlowTest {
         System.out.println("\nTesting with UID: " + uid);
         
         // Generate code
-        var codeResponse = auth.getCode(uid);
+        CodeResponse codeResponse = auth.getCode(uid);
         System.out.println("Code Response: " + codeResponse);
         assertTrue(codeResponse.isSuccess(), "Code generation should succeed for UID: " + uid);
         assertNotNull(codeResponse.getCode(), "Code should not be null for UID: " + uid);
         
         // Parse UID from code
-        var uidResponse = auth.getUidByCode(codeResponse.getCode());
+        UidResponse uidResponse = auth.getUidByCode(codeResponse.getCode());
         System.out.println("UID Response: " + uidResponse);
         assertTrue(uidResponse.isSuccess(), "UID parsing should succeed for UID: " + uid);
         assertEquals(uid, uidResponse.getUid(), "Parsed UID should match for UID: " + uid);
         
         // Generate SSToken
-        var tokenResponse = auth.getSSToken(uid);
+        SSTokenResponse tokenResponse = auth.getSSToken(uid);
         System.out.println("Token Response: " + tokenResponse);
         assertTrue(tokenResponse.isSuccess(), "SSToken generation should succeed for UID: " + uid);
         assertNotNull(tokenResponse.getToken(), "SSToken should not be null for UID: " + uid);
         
         // Parse UID from SSToken
-        var tokenUidResponse = auth.getUidBySSToken(tokenResponse.getToken());
+        UidResponse tokenUidResponse = auth.getUidBySSToken(tokenResponse.getToken());
         System.out.println("UID Response from Token: " + tokenUidResponse);
         assertTrue(tokenUidResponse.isSuccess(), "UID parsing from SSToken should succeed for UID: " + uid);
         assertEquals(uid, tokenUidResponse.getUid(), "UID from SSToken should match for UID: " + uid);
@@ -131,7 +135,7 @@ public class CompleteFlowTest {
         // Test with invalid code
         System.out.println("\n--- Testing Invalid Code ---");
         String invalidCode = "invalid_code_123";
-        var invalidCodeResponse = auth.getUidByCode(invalidCode);
+        UidResponse invalidCodeResponse = auth.getUidByCode(invalidCode);
         System.out.println("Response with invalid code: " + invalidCodeResponse);
         assertFalse(invalidCodeResponse.isSuccess(), "Invalid code should fail");
         assertNotNull(invalidCodeResponse.getErrorCode(), "Error code should be present");
@@ -139,18 +143,18 @@ public class CompleteFlowTest {
         // Test with invalid SSToken
         System.out.println("\n--- Testing Invalid SSToken ---");
         String invalidToken = "invalid_token_456";
-        var invalidTokenResponse = auth.getUidBySSToken(invalidToken);
+        UidResponse invalidTokenResponse = auth.getUidBySSToken(invalidToken);
         System.out.println("Response with invalid token: " + invalidTokenResponse);
         assertFalse(invalidTokenResponse.isSuccess(), "Invalid token should fail");
         assertNotNull(invalidTokenResponse.getErrorCode(), "Error code should be present");
         
         // Test with null/empty inputs
         System.out.println("\n--- Testing Null/Empty Inputs ---");
-        var nullCodeResponse = auth.getUidByCode(null);
+        UidResponse nullCodeResponse = auth.getUidByCode(null);
         System.out.println("Response with null code: " + nullCodeResponse);
         assertFalse(nullCodeResponse.isSuccess(), "Null code should fail");
         
-        var nullTokenResponse = auth.getUidBySSToken("");
+        UidResponse nullTokenResponse = auth.getUidBySSToken("");
         System.out.println("Response with empty token: " + nullTokenResponse);
         assertFalse(nullTokenResponse.isSuccess(), "Empty token should fail");
         
@@ -168,18 +172,20 @@ public class CompleteFlowTest {
             System.out.println("\nTesting with expiration: " + expireSec + " seconds");
             
             // Generate code with custom expiration
-            var codeResponse = auth.getCode(TEST_UID, expireSec);
+            CodeResponse codeResponse = auth.getCode(TEST_UID, expireSec);
             System.out.println("Code Response: " + codeResponse);
             assertTrue(codeResponse.isSuccess(), "Code generation should succeed with expiration: " + expireSec);
             assertNotNull(codeResponse.getExpireDate(), "Expiration date should be set");
             
             // Generate SSToken with custom expiration
-            var tokenResponse = auth.getSSToken(TEST_UID, expireSec);
+            SSTokenResponse tokenResponse = auth.getSSToken(TEST_UID, expireSec);
             System.out.println("Token Response: " + tokenResponse);
             assertTrue(tokenResponse.isSuccess(), "SSToken generation should succeed with expiration: " + expireSec);
             assertNotNull(tokenResponse.getExpireDate(), "Expiration date should be set");
             
             System.out.println("✅ All operations successful with expiration: " + expireSec + " seconds");
         }
+        
+        System.out.println("✅ Custom expiration times test completed");
     }
 }

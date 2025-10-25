@@ -14,7 +14,7 @@ The Sud GIP Auth Java SDK is an authentication system library designed specifica
 
 * **User ID Retrieval**: Retrieves user IDs through authentication codes or SSTokens
 
-* **Java 17 Compatible**: Fully compatible with Java 17 and higher versions
+* **Java 8 Compatible**: Compatible with Java 8 and higher versions
 
 * **Thread Safe**: Supports concurrent usage in multi-threaded environments
 
@@ -22,7 +22,7 @@ The Sud GIP Auth Java SDK is an authentication system library designed specifica
 
 ## System Requirements
 
-* Java 17 or higher
+* Java 8 or higher
 
 * Maven 3.x or Gradle 4.x+
 
