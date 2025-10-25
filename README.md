@@ -34,7 +34,7 @@ Add the following dependency to your `pom.xml` file:
 
 ```xml
 <dependency>
-    <groupId>tech.sud</groupId>
+    <groupId>tech.sud.auth.gip</groupId>
     <artifactId>sud-gip-auth-java</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -45,7 +45,7 @@ Add the following dependency to your `pom.xml` file:
 Add the following dependency to your `build.gradle` file:
 
 ```gradle
-implementation 'tech.sud:sud-gip-auth-java:1.0.0'
+implementation 'tech.sud.auth.gip:sud-gip-auth-java:1.0.0'
 ```
 
 > **Note**: This SDK will be published to Maven Central Repository. For publishing instructions, see [PUBLISHING.md](./PUBLISHING.md).
@@ -146,9 +146,9 @@ SSTokenResponse ssTokenResponse = auth.getSSToken(uid, 14400);
 ### Exception Handling
 
 ```java
-import tech.sud.gip.auth.exception.SudGIPAuthException;
-import tech.sud.gip.auth.exception.TokenGenerationException;
-import tech.sud.gip.auth.exception.TokenValidationException;
+import tech.sud.auth.gip.auth.exception.SudGIPAuthException;
+import tech.sud.auth.gip.auth.exception.TokenGenerationException;
+import tech.sud.auth.gip.auth.exception.TokenValidationException;
 
 try {
     CodeResponse response = auth.getCode(uid);
