@@ -1,10 +1,8 @@
 # Sud GIP Auth Java SDK
 
-<mcreference link="https://github.com/SudTechnology/sud-gip-auth-php" index="0">0</mcreference>
-
 ## Introduction
 
-The Sud GIP Auth Java SDK is an authentication system library designed specifically for Java developers, providing complete JWT (JSON Web Token) authentication functionality. This SDK is fully ported from the PHP version and supports generating authentication codes, server-to-server tokens (SSTokens), token verification, and user ID retrieval, enabling developers to easily integrate Sud GIP authentication services into Java projects.
+The Sud GIP Auth Java SDK is an authentication system library designed specifically for Java developers, providing complete JWT (JSON Web Token) authentication functionality. This SDK supports generating authentication codes, server-to-server tokens (SSTokens), token verification, and user ID retrieval, enabling developers to easily integrate Sud GIP authentication services into Java projects.
 
 ## Features
 
@@ -34,7 +32,7 @@ Add the following dependency to your `pom.xml` file:
 
 ```xml
 <dependency>
-    <groupId>tech.sud.auth.gip</groupId>
+    <groupId>tech.sud.gip</groupId>
     <artifactId>sud-gip-auth-java</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -45,10 +43,8 @@ Add the following dependency to your `pom.xml` file:
 Add the following dependency to your `build.gradle` file:
 
 ```gradle
-implementation 'tech.sud.auth.gip:sud-gip-auth-java:1.0.0'
+implementation 'tech.sud.gip:sud-gip-auth-java:1.0.0'
 ```
-
-> **Note**: This SDK will be published to Maven Central Repository. For publishing instructions, see [PUBLISHING.md](./PUBLISHING.md).
 
 ## Quick Start
 
