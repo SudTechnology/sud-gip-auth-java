@@ -6,7 +6,7 @@
 
     <groupId>tech.sud.gip</groupId>
     <artifactId>sud-gip-auth-java</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>Sud GIP Auth Java SDK</name>

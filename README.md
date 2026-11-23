@@ -34,7 +34,7 @@ Add the following dependency to your `pom.xml` file:
 <dependency>
     <groupId>tech.sud.gip</groupId>
     <artifactId>sud-gip-auth-java</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ Add the following dependency to your `pom.xml` file:
 Add the following dependency to your `build.gradle` file:
 
 ```gradle
-implementation 'tech.sud.gip:sud-gip-auth-java:1.0.0'
+implementation 'tech.sud.gip:sud-gip-auth-java:1.1.0'
 ```
 
 ## Quick Start
@@ -221,3 +221,48 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 * ✅ JDK 1.8 compatibility
 
+
+
+## HTTP request signing and callback verification
+
+Version 1.1.0 adds `RequestSigner` without changing existing token APIs or encoding.
+
+```java
+import java.nio.charset.StandardCharsets;
+import java.util.UUID;
+import tech.sud.auth.gip.auth.RequestSigner;
+
+RequestSigner signer = new RequestSigner(appId, appSecret);
+String timestamp = Long.toString(System.currentTimeMillis());
+String nonce = UUID.randomUUID().toString();
+// Serialize ONCE, then sign and send exactly the same byte array.
+byte[] rawBody = "{\"example\":true}".getBytes(StandardCharsets.UTF_8);
+String authorization = signer.generateAuthorization(timestamp, nonce, rawBody);
+// Set the outgoing Authorization header to authorization and send rawBody unchanged.
+String signature = signer.generateSignature(timestamp, nonce, rawBody);
+boolean valid = signer.verifySignature(appId, timestamp, nonce, rawBody, signature);
+```
+
+Outgoing API requests use a single header:
+
+```text
+Authorization: Sud-Auth app_id="...",timestamp="...",nonce="...",signature="..."
+```
+
+Incoming callbacks use `Sud-AppId`, `Sud-Timestamp`, `Sud-Nonce`, and `Sud-Signature`.
+Read these headers in your HTTP adapter and pass their values plus the **original received
+body bytes** to `verifySignature`. Reject ambiguous duplicate headers in the adapter.
+Only parse JSON or bind a DTO **after** verification succeeds. Never deserialize/reserialize,
+trim whitespace, reorder fields, normalize line endings, or decode/re-encode the received body.
+
+The signed content is `appId + LF + timestamp + LF + nonce + LF + rawBody + LF`.
+The final LF is required even if the body already ends in a newline. The algorithm is
+HMAC-SHA1 with the original UTF-8 application secret and a lowercase 40-character hex result.
+Use `new byte[0]` for an empty body; null is invalid. Metadata must be nonempty printable ASCII
+without whitespace, quotes, backslashes, or commas. Generation throws `IllegalArgumentException`
+for invalid arguments; verification returns false for invalid inputs or a mismatched application ID.
+
+This HTTP signing protocol is separate from token signing. The signer does not alter the secret,
+make HTTP requests, check timestamp freshness, store nonces, or enforce replay protection.
+Apply those service policies separately. URL, method, and query parameters are not signed.
+The class is thread-safe and compatible with Java 8.
