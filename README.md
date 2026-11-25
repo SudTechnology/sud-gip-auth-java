@@ -266,3 +266,27 @@ This HTTP signing protocol is separate from token signing. The signer does not a
 make HTTP requests, check timestamp freshness, store nonces, or enforce replay protection.
 Apply those service policies separately. URL, method, and query parameters are not signed.
 The class is thread-safe and compatible with Java 8.
+
+
+## App Server Config signature (ASC)
+
+Available since **1.2.0**, with Java 8 compatibility:
+
+```java
+import tech.sud.auth.gip.auth.AscSigner;
+
+String sign = AscSigner.ascSign(appId, appSecret);
+```
+
+ASC means **App Server Config**. This helper returns **32 lowercase hexadecimal
+characters** using HMAC-MD5. The message is the original UTF-8 app ID and the key
+is the original UTF-8 secret. **No newline is appended.** Do not trim, normalize,
+or pre-hash either input. Existing whitespace is preserved.
+
+Null, empty, or invalid Unicode inputs throw `IllegalArgumentException`.
+The JWT HS256 32-byte key minimum does not apply to ASC signing.
+
+This helper only calculates the ASC sign. It does not construct URLs, perform
+HTTP requests, fetch configuration, cache results, or refresh configuration.
+It is separate from `RequestSigner` (HMAC-SHA1 business request/callback signing)
+and JWT authentication.
