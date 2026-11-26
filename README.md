@@ -209,7 +209,7 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 * 💬 [Discussions](https://github.com/SudTechnology/sud-gip-auth-java/discussions)
 
-* 📧 Technical Support: <support@sud.tech>
+* 📧 Technical Support: <dev@sud.tech>
 
 ## Changelog
 
